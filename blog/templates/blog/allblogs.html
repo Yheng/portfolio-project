@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ariel Retes</title>
+    <title>Ariel's Blog</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -33,7 +33,7 @@
               <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'allblog' %}">Blog</a>
+              <a class="nav-link active" href="{% url 'allblog' %}">Blog</a>
             </li>
           </ul>
         </div>
@@ -41,38 +41,31 @@
     </header>
 
     <main role="main">
-
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi, I'm Ariel.</h1>
-          <p class="lead text-muted">Hey, my name is Ariel Retes and I love coding Django Python language.</p>
-          <p>
-            <a href="mailto:yhengdesigns@gmail.com" class="btn btn-primary my-2">Email Me</a>
-          </p>
-          <img src="{% static 'gravatar-id.png' %}" class="img-thumbnail" width="250" />
-        </div>
-      </section>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-            
-            {% for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{ job.image.url }}" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-            
-          </div>
-        </div>
+      <div class="container">
+      
+      <h1 class="text-center pt-3">Blog</h1>
+      <br />
+      <br />
+      <h2>Latest Posts</h2>
+      
+      
+      <ul class="list-group list-group-flush">
+        {% for blog in blogs.all %}
+        <li class="list-group-item">
+        
+        <div class="blog-post">
+                    <h2 class="blog-post-title"><a href="{% url 'detail' blog.id %}">{{ blog.title }}</a></h2>
+                    <p class="blog-post-meta">{{ blog.pub_date_pretty }}, posted by <a href="#">User</a></p>
+                    <img src="{{ blog.image.url }}" alt="Thumbnail" class="img-thumbnail rounded float-left mr-3" width="200" height="200">
+                    <p>{{ blog.summary }}</p>
+        </div>        
+        
+        </li>
+        {% endfor %}
+      </ul>
+      
+      
       </div>
-
     </main>
 
     <footer class="text-muted">
